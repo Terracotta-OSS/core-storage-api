@@ -5,6 +5,6 @@ package org.terracotta.corestorage;
 
 public interface KeyValueStorageFactory {
 
-  public <K, V> KeyValueStorage<K, V> createMap(KeyValueStorageConfig<K, V> mapStorageConfigImpl, Object ... configs);
+  public <K, V> KeyValueStorage<K, V> create(KeyValueStorageConfig<K, V> mapStorageConfigImpl, Object ... configs);
 
 }

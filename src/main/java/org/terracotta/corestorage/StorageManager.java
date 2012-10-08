@@ -8,11 +8,11 @@ import java.util.concurrent.Future;
 public interface StorageManager {
 
   
-  <K, V> KeyValueStorage<K, V> getMap(String alias, Class<K> keyClass, Class<V> valueClass);
+  <K, V> KeyValueStorage<K, V> getKeyValueStorage(String alias, Class<K> keyClass, Class<V> valueClass);
 
-  void detachMap(String alias);
+  void detachKeyValueStorage(String alias);
 
-  <K, V> void attachMap(String alias, KeyValueStorage<K, V> map, Class<K> keyClass, Class<V> valueClass);
+  <K, V> void attachKeyValueStorage(String alias, KeyValueStorage<K, V> storage, Class<K> keyClass, Class<V> valueClass);
 
   void begin();
 

@@ -3,7 +3,9 @@
  */
 package org.terracotta.corestorage;
 
+import java.util.Collection;
 import java.util.concurrent.Future;
+import org.terracotta.corestorage.monitoring.MonitoredResource;
 
 public interface StorageManager {
 
@@ -23,4 +25,11 @@ public interface StorageManager {
   void shutdown();
 
   public StorageManagerConfiguration getConfiguration();
+  
+  /**
+   * Return the monitored resource consumed by this StorageManager.
+   * 
+   * @return all monitored resources
+   */
+  public Collection<MonitoredResource> getMonitoredResources();
 }

@@ -17,13 +17,13 @@ public interface MonitoredResource {
    * @return used resource
    */
   long getUsed();
-  
+
   /**
    * Returns the amount of free resource.
    * 
    * @return free resource
    */
-  long getFree();
+  long getReserved();
   
   /**
    * Returns the total amount of resource.
@@ -35,8 +35,13 @@ public interface MonitoredResource {
   /**
    * Set a resource usage threshold condition and associated callback.
    */
-  void addThreshold(long value, Callable<?> action);
+  void addUsedThreshold(long value, Callable<?> action);
 
+  /**
+   * Set a resource usage threshold condition and associated callback.
+   */
+  void addReservedThreshold(long value, Callable<?> action);
+  
   /**
    * Remove the resource usage threshold associated with the action.
    * 

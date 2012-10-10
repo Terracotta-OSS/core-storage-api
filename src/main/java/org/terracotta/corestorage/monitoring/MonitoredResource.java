@@ -11,6 +11,20 @@ import java.util.concurrent.Callable;
  */
 public interface MonitoredResource {
 
+  enum Type {
+    HEAP,
+    OFFHEAP,
+    DISK,
+    OTHER;
+  }
+  
+  /**
+   * Returns the type of this resource.
+   * 
+   * @return resource type
+   */
+  Type getType();
+  
   /**
    * Returns the amount of used resource.
    * 
@@ -19,9 +33,9 @@ public interface MonitoredResource {
   long getUsed();
 
   /**
-   * Returns the amount of free resource.
+   * Returns the amount of reserved resource.
    * 
-   * @return free resource
+   * @return reserved resource
    */
   long getReserved();
   
@@ -34,18 +48,23 @@ public interface MonitoredResource {
   
   /**
    * Set a resource usage threshold condition and associated callback.
+   * 
+   * @throws UnsupportedOperationException if this resource doesn't support thresholds
    */
-  void addUsedThreshold(long value, Callable<?> action);
+  void addUsedThreshold(long value, Callable<?> action) throws UnsupportedOperationException;
 
   /**
    * Set a resource usage threshold condition and associated callback.
+   * 
+   * @throws UnsupportedOperationException if this resource doesn't support thresholds
    */
-  void addReservedThreshold(long value, Callable<?> action);
+  void addReservedThreshold(long value, Callable<?> action) throws UnsupportedOperationException;
   
   /**
    * Remove the resource usage threshold associated with the action.
    * 
    * @throws IllegalArgumentException if the action is not associated with a threshold
+   * @throws UnsupportedOperationException if this resource doesn't support thresholds
    */
-  void removeThreshold(Callable<?> action) throws IllegalArgumentException;
+  void removeThreshold(Callable<?> action) throws IllegalArgumentException, UnsupportedOperationException;
 }

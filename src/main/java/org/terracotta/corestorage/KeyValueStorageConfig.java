@@ -15,12 +15,11 @@ public interface KeyValueStorageConfig<K, V> {
   
   Class<V> getValueClass();
 
-  void setKeySerializer(Serializer<K> serializer);
+  void setKeySerializer(Serializer<? super K> serializer);
 
-  void setValueSerializer(Serializer<V> serializer);
+  void setValueSerializer(Serializer<? super V> serializer);
 
-  Serializer<K> getKeySerializer();
+  Serializer<? super K> getKeySerializer();
 
-  Serializer<V> getValueSerializer();
-
+  Serializer<? super V> getValueSerializer();
 }

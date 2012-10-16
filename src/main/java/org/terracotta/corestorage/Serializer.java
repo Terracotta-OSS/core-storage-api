@@ -5,11 +5,10 @@ package org.terracotta.corestorage;
 
 import java.nio.ByteBuffer;
 
-public interface Serializer<T> {
-  
-  T deserialize(ByteBuffer buffer);
+public abstract class Serializer<T> implements Transformer<T, ByteBuffer> {
 
-  ByteBuffer serialize(T t);
-
-  boolean equals(ByteBuffer left, Object right);
+  @Override
+  public Class<ByteBuffer> getTargetClass() {
+    return ByteBuffer.class;
+  }
 }

@@ -5,10 +5,6 @@ package org.terracotta.corestorage.monitoring;
 
 import java.util.concurrent.Callable;
 
-/**
- *
- * @author Chris Dennis
- */
 public interface MonitoredResource {
 
   enum Type {

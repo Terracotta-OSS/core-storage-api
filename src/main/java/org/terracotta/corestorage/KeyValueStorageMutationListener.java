@@ -7,8 +7,8 @@ import java.util.Map;
 
 public interface KeyValueStorageMutationListener<K, V> {
   
-  void added(Retriever<? extends K> key, Retriever<? extends V> value, Map<? extends Enum, Object> metadata);
+  void added(Retriever<? extends K> key, Retriever<? extends V> value, byte metadata);
   
-  void removed(Retriever<? extends K> key, Retriever<? extends V> value, Map<? extends Enum, Object> metadata);
+  void removed(Retriever<? extends K> key, Retriever<? extends V> value);
   
 }

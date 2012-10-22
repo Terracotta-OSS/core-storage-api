@@ -23,6 +23,8 @@ public interface KeyValueStorage<K, V> {
   // TODO: what exception to catch when
   public void put(K key, V value);
 
+  public void put(K key, V value, byte metadata);
+
   public V get(K key);
 
   public boolean remove(K key);

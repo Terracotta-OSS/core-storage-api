@@ -16,4 +16,6 @@ public interface KeyValueStorageConfig<K, V> {
   Transformer<? super K, ?> getKeyTransformer();
 
   Transformer<? super V, ?> getValueTransformer();
+  
+  int getConcurrency();
 }

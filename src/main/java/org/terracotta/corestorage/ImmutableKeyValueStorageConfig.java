@@ -9,8 +9,6 @@ import java.util.List;
 
 public class ImmutableKeyValueStorageConfig<K, V> implements KeyValueStorageConfig<K, V> {
 
-  private static final int DEFAULT_CONCURRENCY = 16;
-  
   private final Class<K> keyClass;
   private final Class<V> valueClass;
   private final Transformer<? super K, ?> keySerializer;
@@ -19,32 +17,24 @@ public class ImmutableKeyValueStorageConfig<K, V> implements KeyValueStorageConf
   
   private final transient List<KeyValueStorageMutationListener<? super K, ? super V>> listeners;
 
+  @Deprecated
   public ImmutableKeyValueStorageConfig(Class<K> keyClass, Class<V> valueClass) {
     this(keyClass, valueClass, Collections.<KeyValueStorageMutationListener<? super K, ? super V>>emptyList());
   }
   
+  @Deprecated
   public ImmutableKeyValueStorageConfig(Class<K> keyClass, Class<V> valueClass, int concurrency) {
-    this(keyClass, valueClass, Collections.<KeyValueStorageMutationListener<? super K, ? super V>>emptyList(), concurrency);
+    this(keyClass, valueClass, null, null, Collections.<KeyValueStorageMutationListener<? super K, ? super V>>emptyList(), concurrency);
   }
   
+  @Deprecated
   public ImmutableKeyValueStorageConfig(Class<K> keyClass, Class<V> valueClass, List<KeyValueStorageMutationListener<? super K, ? super V>> listeners) {
-    this(keyClass, valueClass, null, null, listeners);
+    this(keyClass, valueClass, null, null, listeners, 16);
   }
   
-  public ImmutableKeyValueStorageConfig(Class<K> keyClass, Class<V> valueClass, List<KeyValueStorageMutationListener<? super K, ? super V>> listeners, int concurrency) {
-    this(keyClass, valueClass, null, null, listeners, concurrency);
-  }
-  
+  @Deprecated
   public ImmutableKeyValueStorageConfig(Class<K> keyClass, Class<V> valueClass, Transformer<? super K, ?> keySerializer, Transformer<? super V, ?> valueSerializer) {
-    this(keyClass, valueClass, keySerializer, valueSerializer, Collections.<KeyValueStorageMutationListener<? super K, ? super V>>emptyList());
-  }
-  
-  public ImmutableKeyValueStorageConfig(Class<K> keyClass, Class<V> valueClass, Transformer<? super K, ?> keySerializer, Transformer<? super V, ?> valueSerializer, int concurrency) {
-    this(keyClass, valueClass, keySerializer, valueSerializer, Collections.<KeyValueStorageMutationListener<? super K, ? super V>>emptyList(), concurrency);
-  }
-  
-  public ImmutableKeyValueStorageConfig(Class<K> keyClass, Class<V> valueClass, Transformer<? super K, ?> keySerializer, Transformer<? super V, ?> valueSerializer, List<KeyValueStorageMutationListener<? super K, ? super V>> listeners) {
-    this(keyClass, valueClass, keySerializer, valueSerializer, listeners, DEFAULT_CONCURRENCY);
+    this(keyClass, valueClass, keySerializer, valueSerializer, Collections.<KeyValueStorageMutationListener<? super K, ? super V>>emptyList(), 16);
   }
   
   public ImmutableKeyValueStorageConfig(Class<K> keyClass, Class<V> valueClass, Transformer<? super K, ?> keySerializer, Transformer<? super V, ?> valueSerializer, List<KeyValueStorageMutationListener<? super K, ? super V>> listeners, int concurrency) {
@@ -85,4 +75,48 @@ public class ImmutableKeyValueStorageConfig<K, V> implements KeyValueStorageConf
   public int getConcurrency() {
     return concurrency;
   }
+
+  public static <K, V> Builder<K, V> builder(Class<K> keyClass, Class<V> valueClass) {
+    return new Builder(keyClass, valueClass);
+  }
+  
+  public static class Builder<K, V> {
+    
+    private final Class<K> keyClass;
+    private final Class<V> valueClass;
+    private final List<KeyValueStorageMutationListener<? super K, ? super V>> listeners = new ArrayList<KeyValueStorageMutationListener<? super K, ? super V>>();
+    private Transformer<? super K, ?> keyTransformer;
+    private Transformer<? super V, ?> valueTransformer;
+    private int concurrency = 16;
+
+    public Builder(Class<K> keyClass, Class<V> valueClass) {
+      this.keyClass = keyClass;
+      this.valueClass = valueClass;
+    }
+    
+    public Builder<K, V> keyTransformer(Transformer<? super K, ?> keyTransformer) {
+      this.keyTransformer = keyTransformer;
+      return this;
+    }
+    
+    public Builder<K, V> valueTransformer(Transformer<? super V, ?> valueTransformer) {
+      this.valueTransformer = valueTransformer;
+      return this;
+    }
+
+    public Builder<K, V> concurrency(int concurrency) {
+      this.concurrency = concurrency;
+      return this;
+    }
+    
+    public Builder<K, V> listener(KeyValueStorageMutationListener<? super K, ? super V> listener) {
+      this.listeners.add(listener);
+      return this;
+    }
+    
+    public KeyValueStorageConfig<K, V> build() {
+      return new ImmutableKeyValueStorageConfig(keyClass, valueClass, keyTransformer, valueTransformer, listeners, concurrency);
+    }
+  }
+  
 }

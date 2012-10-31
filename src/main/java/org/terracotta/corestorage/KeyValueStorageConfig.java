@@ -4,6 +4,7 @@
 package org.terracotta.corestorage;
 
 import java.util.List;
+import java.util.Properties;
 
 public interface KeyValueStorageConfig<K, V> {
 

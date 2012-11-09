@@ -3,8 +3,6 @@
  */
 package org.terracotta.corestorage.monitoring;
 
-import java.util.concurrent.Callable;
-
 public interface MonitoredResource {
 
   enum Type {
@@ -43,24 +41,43 @@ public interface MonitoredResource {
   long getTotal();
   
   /**
-   * Set a resource usage threshold condition and associated callback.
+   * Set a resource usage threshold condition and associated action.
+   * <p>
+   * Triggered threshold actions will be called synchronously and therefore
+   * mutating a map that consumes the same resource in the action may cause
+   * deadlocks.
    * 
    * @throws UnsupportedOperationException if this resource doesn't support thresholds
    */
-  void addUsedThreshold(long value, Callable<?> action) throws UnsupportedOperationException;
-
-  /**
-   * Set a resource usage threshold condition and associated callback.
-   * 
-   * @throws UnsupportedOperationException if this resource doesn't support thresholds
-   */
-  void addReservedThreshold(long value, Callable<?> action) throws UnsupportedOperationException;
+  Runnable addUsedThreshold(Direction direction, long value, Runnable action);
   
   /**
-   * Remove the resource usage threshold associated with the action.
+   * Remove a resource usage threshold condition.
+   */
+  Runnable removeUsedThreshold(Direction direction, long value);
+  
+  /**
+   * Set a resource reservation threshold condition and associated action.
+   * <p>
+   * Triggered threshold actions will be called synchronously and therefore
+   * mutating a map that consumes the same resource in the action may cause
+   * deadlocks.
    * 
-   * @throws IllegalArgumentException if the action is not associated with a threshold
    * @throws UnsupportedOperationException if this resource doesn't support thresholds
    */
-  void removeThreshold(Callable<?> action) throws IllegalArgumentException, UnsupportedOperationException;
+  Runnable addReservedThreshold(Direction direction, long value, Runnable action);
+  
+  /**
+   * Remove a resource reservation threshold condition.
+   */
+  Runnable removeReservedThreshold(Direction direction, long value);
+  
+  /**
+   * Threshold transition directions.
+   */
+  enum Direction {
+    RISING, FALLING;
+  }
+  
+  
 }

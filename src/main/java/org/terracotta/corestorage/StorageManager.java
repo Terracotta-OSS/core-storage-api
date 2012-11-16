@@ -4,11 +4,15 @@
 package org.terracotta.corestorage;
 
 import java.util.Collection;
+import java.util.Map;
 import java.util.concurrent.Future;
+
 import org.terracotta.corestorage.monitoring.MonitoredResource;
 
 public interface StorageManager {
   
+  Map<String, String> getProperties();
+
   <K, V> KeyValueStorage<K, V> getKeyValueStorage(String alias, Class<K> keyClass, Class<V> valueClass);
 
   void destroyKeyValueStorage(String alias);

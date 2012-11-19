@@ -25,7 +25,7 @@ public interface StorageManager {
 
   Future<?> start();
   
-  void shutdown();
+  void close();
 
   /**
    * Return the monitored resource consumed by this StorageManager.

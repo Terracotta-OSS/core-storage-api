@@ -3,6 +3,19 @@
  */
 package org.terracotta.corestorage.monitoring;
 
+/**
+ * Live view of the utilization of a resource.
+ * <p>
+ * The values given here are defined as:
+ * <ul>
+ * <li><em>Total</em>: the maximum amount of this resource that can ever be used. Unbounded resources may return {@code Long.MAX_VALUE} here.</li>
+ * <li><em>Reserved</em>: the amount of this resource that has been reserved for use.</li>
+ * <li><em>Used</em>: the amount of the reserved resource that is actively being used.</li>
+ * <li><em>Vital</em>: the amount of the used resource that cannot be relinquished by the application.  Resources used for internal caching for example, may not
+ * be vital.  This means they could be released by internal processes without requiring intervention by the user.</li>
+ * </ul>
+ * Values returned by resources should honor the relation: {@code vital <= used <= reserved <= total}.
+ */
 public interface MonitoredResource {
 
   enum Type {
@@ -18,6 +31,13 @@ public interface MonitoredResource {
    * @return resource type
    */
   Type getType();
+  
+  /**
+   * Returns the amount of used resource that is vital.
+   * 
+   * @return vital resource
+   */
+  long getVital();
   
   /**
    * Returns the amount of used resource.

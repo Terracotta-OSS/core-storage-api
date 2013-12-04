@@ -5,20 +5,20 @@
     <artifactId>forge-parent</artifactId>
     <groupId>org.terracotta.forge</groupId>
     <version>3.0</version>
-    <relativePath />
+    <relativePath/>
   </parent>
 
   <name>Core Storage API</name>
   <groupId>org.terracotta.internal</groupId>
   <artifactId>core-storage-api</artifactId>
-  <version>1.3-SNAPSHOT</version>
+  <version>1.3</version>
   <packaging>jar</packaging>
 
   <properties>
   
-    <metadata.build.jenkins.url>http://jenkinsmaster.terracotta.lan:9000/job/core-storage-api_trunk_releaser/4/</metadata.build.jenkins.url>
+    <metadata.build.jenkins.url>http://jenkinsmaster.terracotta.lan:9000/job/core-storage-api_trunk_releaser/5/</metadata.build.jenkins.url>
     <metadata.build.maven.active.profiles>terracotta-repositories,release,tc-publish</metadata.build.maven.active.profiles>
-    <metadata.svn.revision>41716</metadata.svn.revision>
+    <metadata.svn.revision>41720</metadata.svn.revision>
   </properties>
 
   <repositories>

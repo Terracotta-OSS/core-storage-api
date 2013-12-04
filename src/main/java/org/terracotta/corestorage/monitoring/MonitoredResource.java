@@ -22,6 +22,7 @@ public interface MonitoredResource {
     HEAP,
     OFFHEAP,
     DISK,
+    DATA,
     OTHER;
   }
   

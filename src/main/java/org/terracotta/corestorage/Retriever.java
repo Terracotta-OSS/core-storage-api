@@ -1,7 +1,7 @@
 /* 
  * The contents of this file are subject to the Terracotta Public License Version
  * 2.0 (the "License"); You may not use this file except in compliance with the
- * You may obtain a copy of the License at 
+ * License. You may obtain a copy of the License at 
  *
  *      http://terracotta.org/legal/terracotta-public-license.
  *

@@ -22,7 +22,7 @@ The Initial Developer of the Covered Software is
   <parent>
     <artifactId>forge-parent</artifactId>
     <groupId>org.terracotta.forge</groupId>
-    <version>3.0</version>
+    <version>3.19</version>
     <relativePath />
   </parent>
 
@@ -32,34 +32,37 @@ The Initial Developer of the Covered Software is
   <version>1.4-SNAPSHOT</version>
   <packaging>jar</packaging>
 
-  <properties>
-  
-    <metadata.build.jenkins.url>http://jenkinsmaster.terracotta.lan:9000/job/core-storage-api_trunk_releaser/5/</metadata.build.jenkins.url>
-    <metadata.build.maven.active.profiles>terracotta-repositories,release,tc-publish</metadata.build.maven.active.profiles>
-    <metadata.svn.revision>41720</metadata.svn.revision>
-  </properties>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>2.7</version>
+        <executions>
+          <execution>
+            <id>attach-javadocs</id>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
 
-  <repositories>
+  <distributionManagement>
     <repository>
-      <id>terracotta-snapshots</id>
-      <url>http://www.terracotta.org/download/reflector/snapshots</url>
+      <id>terracotta-os-releases</id>
+      <name>Terracotta OS Releases Repository</name>
+      <url>${terracotta-os-releases-url}</url>
     </repository>
-    <repository>
-      <id>terracotta-releases</id>
-      <url>http://www.terracotta.org/download/reflector/releases</url>
-    </repository>
-  </repositories>
-  
-  <pluginRepositories>
-    <pluginRepository>
-      <id>terracotta-snapshots</id>
-      <url>http://www.terracotta.org/download/reflector/snapshots</url>
-    </pluginRepository>
-    <pluginRepository>
-      <id>terracotta-releases</id>
-      <url>http://www.terracotta.org/download/reflector/releases</url>
-    </pluginRepository> 
-  </pluginRepositories>
+    <snapshotRepository>
+      <id>terracotta-os-snapshots</id>
+      <uniqueVersion>false</uniqueVersion>
+      <name>Terracotta OS Snapshots Repository</name>
+      <url>${terracotta-os-snapshots-url}</url>
+    </snapshotRepository>
+  </distributionManagement>
 
   <scm>
     <connection>scm:git:git@github.softwareag.com:Terracotta-OSS/core-storage-api.git</connection>

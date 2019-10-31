@@ -26,14 +26,10 @@ The Initial Developer of the Covered Software is
   <name>Core Storage API</name>
   <groupId>org.terracotta.internal</groupId>
   <artifactId>core-storage-api</artifactId>
-  <version>1.4</version>
+  <version>1.5-SNAPSHOT</version>
   <packaging>jar</packaging>
 
   <properties>
-  
-    <metadata.build.jenkins.url>http://jenkins.terracotta.eur.ad.sag:8080/job/releasers/job/core-storage-api_trunk_releaser/6/</metadata.build.jenkins.url>
-    <metadata.build.maven.active.profiles>terracotta-repositories,release,tc-publish,fullmode</metadata.build.maven.active.profiles>
-    <metadata.svn.revision>52995</metadata.svn.revision>
   </properties>
 
   <repositories>

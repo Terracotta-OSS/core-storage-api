@@ -13,8 +13,7 @@ The Covered Software is Core Storage API.
 
 The Initial Developer of the Covered Software is 
      Terracotta, Inc., a Software AG company
--->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+--><project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
@@ -27,10 +26,14 @@ The Initial Developer of the Covered Software is
   <name>Core Storage API</name>
   <groupId>org.terracotta.internal</groupId>
   <artifactId>core-storage-api</artifactId>
-  <version>1.4-SNAPSHOT</version>
+  <version>1.4</version>
   <packaging>jar</packaging>
 
   <properties>
+  
+    <metadata.build.jenkins.url>http://jenkins.terracotta.eur.ad.sag:8080/job/releasers/job/core-storage-api_trunk_releaser/6/</metadata.build.jenkins.url>
+    <metadata.build.maven.active.profiles>terracotta-repositories,release,tc-publish,fullmode</metadata.build.maven.active.profiles>
+    <metadata.svn.revision>52995</metadata.svn.revision>
   </properties>
 
   <repositories>

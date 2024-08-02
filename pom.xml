@@ -40,6 +40,23 @@ limitations under the License.
     </repository>
   </repositories>
 
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-checkstyle-plugin</artifactId>
+        <dependencies>
+          <!-- Java 8 Compatible Checkstyle -->
+          <dependency>
+            <groupId>com.puppycrawl.tools</groupId>
+            <artifactId>checkstyle</artifactId>
+            <version>9.3</version>
+          </dependency>
+        </dependencies>
+      </plugin>
+    </plugins>
+  </build>
+
   <scm>
     <connection>scm:git:git@github.com:Terracotta-OSS/core-storage-api.git</connection>
     <developerConnection>scm:git:https://github.com/Terracotta-OSS/core-storage-api.git</developerConnection>
